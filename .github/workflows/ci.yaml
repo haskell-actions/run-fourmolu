@@ -7,14 +7,16 @@ on:
     types:
       - opened
       - synchronize
+      - reopened
+      - ready_for_review
 jobs:
   build:
     strategy:
       matrix:
         os:
           - ubuntu-latest
-          - macOS-latest
-          - windows-latest
+          # - macOS-latest
+          # - windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Disable core.autocrlf on Windows
