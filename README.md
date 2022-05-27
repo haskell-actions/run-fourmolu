@@ -76,5 +76,38 @@ disable `core.autocrlf`:
 $ git config --global core.autocrlf false
 ```
 
+## Hacking on this repo
+
+In order to do development on this repo, you first need to install NodeJS and
+`npm` to your system.  This has been confirmed to work with the following
+versions, but newer (or slightly older) versions may work as well:
+
+- **NodeJS**: 14.19.1
+- **`npm`**: 6.14.16
+
+Next, clone this repo:
+
+```console
+$ git clone git@github.com:bitnomial/fourmolu-action.git
+```
+
+Then, within this repo, install all dependencies defined in `package.json`:
+
+```console
+$ npm install
+```
+
+Now, you should be setup to start development.  Development consists of hacking
+on the [`./index.js`](./index.js) file.  After making changes to this file,
+you'll need to regenerate the files in [`./dist/`](./dist).  You can do that
+with the following command:
+
+```console
+$ npm run prepare
+```
+
+When sending a PR, make sure to run `npm run prepare` and commit the changes
+to `./dist` whenever you make a change in `./index.js`.
+
 [fourmolu]: https://github.com/fourmolu/fourmolu
 [git-core-autocrlf]: https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
