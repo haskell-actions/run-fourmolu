@@ -29,7 +29,7 @@ Here's a more complicated example that shows more options being used:
 - uses: bitnomial/fourmolu-action@v1
   with:
     # Only check the format of .hs in the src/ directory.
-    path: |
+    pattern: |
       src/**/*.hs
 
     # Don't follow symbolic links to .hs files.
