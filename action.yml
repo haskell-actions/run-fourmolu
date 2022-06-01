@@ -1,4 +1,4 @@
-name: 'fourmolu-action'
+name: 'Run Fourmolu'
 description: 'Check formatting of Haskell code with Fourmolu'
 inputs:
   pattern:
