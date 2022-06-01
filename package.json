@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitnomial/fourmolu-action.git"
+    "url": "git+https://github.com/fourmolu/fourmolu-action.git"
   },
   "keywords": [
     "foramtter",
@@ -29,7 +29,7 @@
     "@vercel/ncc": "^0.24.1"
   },
   "bugs": {
-    "url": "https://github.com/bitnomial/fourmolu-action/issues"
+    "url": "https://github.com/fourmolu/fourmolu-action/issues"
   },
-  "homepage": "https://github.com/bitnomial/fourmolu-action#readme"
+  "homepage": "https://github.com/fourmolu/fourmolu-action#readme"
 }
