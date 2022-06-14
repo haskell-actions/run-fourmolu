@@ -11,10 +11,10 @@ main =
     do
         print
             [ "hello"
-            , "bad"
+                      , "bad"
             , "good"
-            , "bye"
+                , "bye"
             ]
         pure ()
     where
-        x = 1
+    x = 1
