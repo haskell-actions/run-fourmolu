@@ -23,7 +23,7 @@ versions available.  Each version of the Fourmolu Action generally has a
 corresponding version of `fourmolu`.  Make sure you pick a Fourmolu Action
 version that uses the version of `fourmolu` you use locally.
 
-## Full Example
+### Full Example
 
 Here's a full YAML file you can copy and paste into your repo that runs
 `fourmolu-action`.  Add this as a file like `.github/workflows/fourmolu.yaml`.
@@ -41,7 +41,7 @@ jobs:
       - uses: fourmolu/fourmolu-action@v1
 ```
 
-## Example with more Options
+### Example with more Options
 
 Here's a more complicated example that shows more options being used:
 
@@ -59,7 +59,7 @@ Here's a more complicated example that shows more options being used:
     extra-args: "--indent-wheres true"
 ```
 
-## Example Usage with Build Matrix
+### Example Usage with Build Matrix
 
 If you are using a build matrix, then it is more efficient to have a
 separate job for checking of formatting:
