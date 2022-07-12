@@ -76,7 +76,7 @@ async function run() {
 
     // Set mode
 
-    exec.exec('chmod', ['+x', fourmolu_cached_path], {silent: true});
+    await exec.exec('chmod', ['+x', fourmolu_cached_path], {silent: true});
 
     // Glob for the files to format
 
