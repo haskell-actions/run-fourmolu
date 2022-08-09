@@ -134,5 +134,30 @@ $ npm run prepare
 When sending a PR, make sure to run `npm run prepare` and commit the changes
 to `./dist` whenever you make a change in `./index.js`.
 
+## Making a new release
+
+The following steps describe how to make a new release of `fourmolu-action`.
+Before making a new release, make sure you've correctly bumped the version
+of `fourmolu` used in `index.js` to match the most recent version
+from the [fourmolu][fourmolu] repository.
+
+To make a new release, first find the most recent release version number:
+
+```console
+$ gh release list | head -n1
+v3	Latest	v3	2022-08-09T15:11:02Z
+```
+
+The most recent release in this case is `v3`, so if you want to make a new
+release, just bump the version by one:
+
+```console
+$ gh release create --notes "This release uses fourmolu-0.9.0.0." --title "v4" v4
+```
+
+You may then want to run `git fetch` to fetch the new tag that has been
+automatically created.
+
+
 [fourmolu]: https://github.com/fourmolu/fourmolu
 [git-core-autocrlf]: https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
