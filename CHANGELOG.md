@@ -1,3 +1,7 @@
+## Fourmolu action v3
+
+* Uses Fourmolu 0.8.0.0.
+
 ## Fourmolu action v2
 
 * Uses Fourmolu 0.7.0.1.
