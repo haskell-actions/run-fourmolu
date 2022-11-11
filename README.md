@@ -149,10 +149,13 @@ v3	Latest	v3	2022-08-09T15:11:02Z
 ```
 
 The most recent release in this case is `v3`, so if you want to make a new
-release, just bump the version by one:
+release, just bump the version by one to `v4`:
 
 ```console
-$ gh release create --notes "This release uses fourmolu-0.9.0.0." --title "v4" v4
+$ vim ./CHANGELOG.md   # add an entry for this new v4 release
+$ git commit -m 'bumping to v4 with fourmolu-0.9.0.0'  # create a commit for the new changelog
+$ git push  # push the changelog commit to the remote master branch
+$ gh release create --notes "This release uses fourmolu-0.9.0.0." --title "v4" v4  # make a Release on GitHub
 ```
 
 You may then want to run `git fetch` to fetch the new tag that has been
