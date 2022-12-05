@@ -58,6 +58,10 @@ echo "Creating git commit..."
 
 git commit -m "Bumping to fourmolu-${fourmolu_new_version}"
 
+echo "Pushing branch to github..."
+
+git push origin HEAD
+
 echo "Opening PR on GitHub..."
 
 gh pr create --title "Bump to fourmolu-${fourmolu_new_version}" --body "https://github.com/fourmolu/fourmolu/releases/tag/v${fourmolu_new_version}"
