@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # A simple shell script for bumping the version of fourmolu-action to use the
-# latest GitHub release of Fourmolu.
+# latest GitHub release of Fourmolu.  This script also creates a PR for this
+# version bump.
 
 set -euo pipefail
 

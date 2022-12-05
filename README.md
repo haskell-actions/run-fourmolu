@@ -23,7 +23,7 @@ versions available.  Each version of the Fourmolu Action generally has a
 corresponding version of `fourmolu`.  Make sure you pick a Fourmolu Action
 version that uses the version of `fourmolu` you use locally.
 
-### Full Example
+### Full example
 
 Here's a full YAML file you can copy and paste into your repo that runs
 `fourmolu-action`.  Add this as a file like `.github/workflows/fourmolu.yaml`.
@@ -59,7 +59,7 @@ Here's a more complicated example that shows more options being used:
     extra-args: "--indent-wheres true"
 ```
 
-### Example Usage with Build Matrix
+### Example usage with build matrix
 
 If you are using a build matrix, then it is more efficient to have a
 separate job for checking of formatting:
@@ -135,6 +135,22 @@ When sending a PR, make sure to run `npm run prepare` and commit the changes
 to `./dist` whenever you make a change in `./index.js`.
 
 ## Making a new release
+
+There is a script to help with making a new release: [`./bump.sh`](./bump.sh).
+This can be run to bump the version of `fourmolu` used by `fourmolu-action`,
+and create a PR for this version bump.
+
+After this PR has been reviewed and merged in, you can create the Release on
+GitHub with the following commands.  Make sure you're on the `master` branch:
+
+```console
+$ gh release create --notes "This release uses fourmolu-0.9.0.0." --title "v4" v4
+```
+
+You can then run `git fetch` to fetch the new tag that has been automatically
+created.
+
+### Making a new release manually
 
 The following steps describe how to make a new release of `fourmolu-action`.
 Before making a new release, make sure you've correctly bumped the version
