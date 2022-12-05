@@ -136,46 +136,22 @@ to `./dist` whenever you make a change in `./index.js`.
 
 ## Making a new release
 
-There is a script to help with making a new release: [`./bump.sh`](./bump.sh).
-This can be run to bump the version of `fourmolu` used by `fourmolu-action`,
-and create a PR for this version bump.
-
-After this PR has been reviewed and merged in, you can create the Release on
-GitHub with the following commands.  Make sure you're on the `master` branch:
+There is a script to help with making a new release:
 
 ```console
-$ gh release create --notes "This release uses fourmolu-0.9.0.0." --title "v4" v4
+$ ./bump.sh
 ```
 
-You can then run `git fetch` to fetch the new tag that has been automatically
-created.
+This script bumps the version of `fourmolu` used by `fourmolu-action`,
+and creates a PR for this version bump.
 
-### Making a new release manually
-
-The following steps describe how to make a new release of `fourmolu-action`.
-Before making a new release, make sure you've correctly bumped the version
-of `fourmolu` used in `index.js` to match the most recent version
-from the [fourmolu][fourmolu] repository.
-
-To make a new release, first find the most recent release version number:
+After this PR has been reviewed and merged in, you can create the new
+[Release](https://github.com/fourmolu/fourmolu-action/releases) on
+GitHub with the following command.  Make sure you're on the `master` branch:
 
 ```console
-$ gh release list | head -n1
-v3	Latest	v3	2022-08-09T15:11:02Z
+$ ./make-github-release.sh
 ```
-
-The most recent release in this case is `v3`, so if you want to make a new
-release, just bump the version by one to `v4`:
-
-```console
-$ vim ./CHANGELOG.md   # add an entry for this new v4 release
-$ git commit -m 'bumping to v4 with fourmolu-0.9.0.0'  # create a commit for the new changelog
-$ git push  # push the changelog commit to the remote master branch
-$ gh release create --notes "This release uses fourmolu-0.9.0.0." --title "v4" v4  # make a Release on GitHub
-```
-
-You may then want to run `git fetch` to fetch the new tag that has been
-automatically created.
 
 
 [fourmolu]: https://github.com/fourmolu/fourmolu
