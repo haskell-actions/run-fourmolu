@@ -16,7 +16,7 @@ In the simple case all you need to do is to add this step to your job:
 - uses: fourmolu/fourmolu-action@v6
 ```
 
-The `@v1` after `fourmolu-action` should be replaced with the version of the
+The `@v6` after `fourmolu-action` should be replaced with the version of the
 Fourmolu Action you want to use.  See
 [Releases](https://github.com/fourmolu/fourmolu-action/releases) for all
 versions available.  Each version of the Fourmolu Action generally has a
