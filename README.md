@@ -13,10 +13,10 @@ and its formatted version.
 In the simple case all you need to do is to add this step to your job:
 
 ```yaml
-- uses: fourmolu/fourmolu-action@v1
+- uses: fourmolu/fourmolu-action@v6
 ```
 
-The `@v1` after `fourmolu-action` should be replaced with the version of the
+The `@v6` after `fourmolu-action` should be replaced with the version of the
 Fourmolu Action you want to use.  See
 [Releases](https://github.com/fourmolu/fourmolu-action/releases) for all
 versions available.  Each version of the Fourmolu Action generally has a
@@ -38,7 +38,7 @@ jobs:
     steps:
       # Note that you must checkout your code before running fourmolu/fourmolu-action
       - uses: actions/checkout@v2
-      - uses: fourmolu/fourmolu-action@v1
+      - uses: fourmolu/fourmolu-action@v6
 ```
 
 ### Example with more Options
@@ -46,7 +46,7 @@ jobs:
 Here's a more complicated example that shows more options being used:
 
 ```yaml
-- uses: fourmolu/fourmolu-action@v1
+- uses: fourmolu/fourmolu-action@v6
   with:
     # Only check the format of .hs in the src/ directory.
     pattern: |
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: fourmolu/fourmolu-action@v1
+      - uses: fourmolu/fourmolu-action@v6
   build:
     runs-on: ubuntu-latest
     needs: fourmolu
