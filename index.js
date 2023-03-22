@@ -7,7 +7,7 @@ const tool_cache = require('@actions/tool-cache');
 const exec = require('@actions/exec');
 const glob = require('@actions/glob');
 
-const fourmolu_version = '0.10.1.0';
+const fourmolu_version = '0.11.0.0';
 
 // XXX: These release binaries appear to be dynamically linked, so they may not
 // run on some systems.
