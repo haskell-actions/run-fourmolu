@@ -1,6 +1,6 @@
 # Fourmolu action
 
-![CI](https://github.com/fourmolu/fourmolu-action/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/haskell-actions/run-fourmolu/workflows/CI/badge.svg?branch=master)
 
 This Fourmolu Action helps to ensure that your Haskell project is
 formatted with [Fourmolu][fourmolu]. The action tries to find all Haskell source
@@ -17,16 +17,16 @@ In the simple case all you need to do is to add this step to your job:
 ```
 
 The `@v6` after `fourmolu-action` should be replaced with the version of the
-Fourmolu Action you want to use.  See
-[Releases](https://github.com/fourmolu/fourmolu-action/releases) for all
-versions available.  Each version of the Fourmolu Action generally has a
-corresponding version of `fourmolu`.  Make sure you pick a Fourmolu Action
+Fourmolu Action you want to use. See
+[Releases](https://github.com/haskell-actions/run-fourmolu/releases) for all
+versions available. Each version of the Fourmolu Action generally has a
+corresponding version of `fourmolu`. Make sure you pick a Fourmolu Action
 version that uses the version of `fourmolu` you use locally.
 
 ### Full example
 
 Here's a full YAML file you can copy and paste into your repo that runs
-`fourmolu-action`.  Add this as a file like `.github/workflows/fourmolu.yaml`.
+`fourmolu-action`. Add this as a file like `.github/workflows/fourmolu.yaml`.
 This Workflow will run everytime you push to a branch.
 
 ```yaml
@@ -82,7 +82,7 @@ passes.
 
 ## Options
 
-The available options are defined in [`./action.yml`](./action.yml).  See that
+The available options are defined in [`./action.yml`](./action.yml). See that
 file for more explanation.
 
 <!-- fourmolu-action currently doesn't support running on Windows. -->
@@ -104,7 +104,7 @@ $ git config --global core.autocrlf false
 ## Hacking on this repo
 
 In order to do development on this repo, you first need to install NodeJS and
-`npm` to your system.  This has been confirmed to work with the following
+`npm` to your system. This has been confirmed to work with the following
 versions, but newer (or slightly older) versions may work as well:
 
 - **NodeJS**: 14.19.1
@@ -122,9 +122,9 @@ Then, within this repo, install all dependencies defined in `package.json`:
 $ npm install
 ```
 
-Now, you should be setup to start development.  Development consists of hacking
-on the [`./index.js`](./index.js) file.  After making changes to this file,
-you'll need to regenerate the files in [`./dist/`](./dist).  You can do that
+Now, you should be setup to start development. Development consists of hacking
+on the [`./index.js`](./index.js) file. After making changes to this file,
+you'll need to regenerate the files in [`./dist/`](./dist). You can do that
 with the following command:
 
 ```console
@@ -146,13 +146,12 @@ This script bumps the version of `fourmolu` used by `fourmolu-action`,
 and creates a PR for this version bump.
 
 After this PR has been reviewed and merged in, you can create the new
-[Release](https://github.com/fourmolu/fourmolu-action/releases) on
-GitHub with the following command.  Make sure you're on the `master` branch:
+[Release](https://github.com/haskell-actions/run-fourmolu/releases) on
+GitHub with the following command. Make sure you're on the `master` branch:
 
 ```console
 $ ./make-github-release.sh
 ```
 
-
-[fourmolu]: https://github.com/fourmolu/fourmolu
+[fourmolu]: https://github.com/haskell-actions/run-fourmolu
 [git-core-autocrlf]: https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
