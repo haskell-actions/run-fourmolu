@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/haskell-actions/run-fourmolu/workflows/CI/badge.svg?branch=master)
 
-This Fourmolu Action helps to ensure that your Haskell project is
+This `run-fourmolu` GitHub Action helps to ensure that your Haskell project is
 formatted with [Fourmolu][fourmolu]. The action tries to find all Haskell source
 code files in your repository and fails if any of them are not formatted. In
 case of failure it prints the diff between the actual contents of the file
@@ -13,20 +13,20 @@ and its formatted version.
 In the simple case all you need to do is to add this step to your job:
 
 ```yaml
-- uses: fourmolu/fourmolu-action@v6
+- uses: haskell-actions/run-fourmolu@v7
 ```
 
-The `@v6` after `fourmolu-action` should be replaced with the version of the
-Fourmolu Action you want to use. See
+The `@v7` after `haskell-actions/run-fourmolu` should be replaced with the version of the
+`run-fourmolu` Action you want to use. See
 [Releases](https://github.com/haskell-actions/run-fourmolu/releases) for all
-versions available. Each version of the Fourmolu Action generally has a
-corresponding version of `fourmolu`. Make sure you pick a Fourmolu Action
+versions available. Each version of the `run-fourmolu` Action generally has a
+corresponding version of `fourmolu`. Make sure you pick a `run-fourmolu` Action
 version that uses the version of `fourmolu` you use locally.
 
 ### Full example
 
 Here's a full YAML file you can copy and paste into your repo that runs
-`fourmolu-action`. Add this as a file like `.github/workflows/fourmolu.yaml`.
+`run-fourmolu`. Add this as a file like `.github/workflows/fourmolu.yaml`.
 This Workflow will run everytime you push to a branch.
 
 ```yaml
@@ -36,9 +36,9 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-      # Note that you must checkout your code before running fourmolu/fourmolu-action
+      # Note that you must checkout your code before running haskell-actions/run-fourmolu
       - uses: actions/checkout@v2
-      - uses: fourmolu/fourmolu-action@v6
+      - uses: haskell-actions/run-fourmolu@v7
 ```
 
 ### Example with more Options
@@ -46,7 +46,7 @@ jobs:
 Here's a more complicated example that shows more options being used:
 
 ```yaml
-- uses: fourmolu/fourmolu-action@v6
+- uses: haskell-actions/run-fourmolu@v7
   with:
     # Only check the format of .hs in the src/ directory.
     pattern: |
@@ -70,22 +70,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: fourmolu/fourmolu-action@v6
+      - uses: haskell-actions/run-fourmolu@v7
   build:
     runs-on: ubuntu-latest
     needs: fourmolu
     ...
 ```
 
-Here, the `build` job depends on `fourmolu` and will not run unless `fourmolu`
-passes.
+Here, the `build` job depends on the `fourmolu` job and will not run unless
+the `fourmolu` job passes.
 
 ## Options
 
 The available options are defined in [`./action.yml`](./action.yml). See that
 file for more explanation.
 
-<!-- fourmolu-action currently doesn't support running on Windows. -->
+<!-- run-fourmolu currently doesn't support running on Windows. -->
 <!--
 
 ## Windows
@@ -113,7 +113,7 @@ versions, but newer (or slightly older) versions may work as well:
 Next, clone this repo:
 
 ```console
-$ git clone git@github.com:fourmolu/fourmolu-action.git
+$ git clone git@github.com:haskell-actions/run-fourmolu.git
 ```
 
 Then, within this repo, install all dependencies defined in `package.json`:
@@ -142,7 +142,7 @@ There is a script to help with making a new release:
 $ ./bump.sh
 ```
 
-This script bumps the version of `fourmolu` used by `fourmolu-action`,
+This script bumps the version of `fourmolu` used by `run-fourmolu`,
 and creates a PR for this version bump.
 
 After this PR has been reviewed and merged in, you can create the new
@@ -153,5 +153,5 @@ GitHub with the following command. Make sure you're on the `master` branch:
 $ ./make-github-release.sh
 ```
 
-[fourmolu]: https://github.com/haskell-actions/run-fourmolu
+[fourmolu]: https://github.com/fourmolu/fourmolu
 [git-core-autocrlf]: https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
