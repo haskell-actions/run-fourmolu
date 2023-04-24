@@ -20,7 +20,7 @@ const tool_cache = __webpack_require__(7784);
 const exec = __webpack_require__(1514);
 const glob = __webpack_require__(8090);
 
-const fourmolu_version = '0.11.0.0';
+const fourmolu_version = '0.12.0.0';
 
 // XXX: These release binaries appear to be dynamically linked, so they may not
 // run on some systems.
