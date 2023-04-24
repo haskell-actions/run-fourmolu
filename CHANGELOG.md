@@ -1,3 +1,7 @@
+## run-fourmolu v8
+
+* Uses Fourmolu 0.12.0.0
+
 ## Fourmolu action v7
 
 * Uses Fourmolu 0.11.0.0
