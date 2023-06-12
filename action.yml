@@ -18,6 +18,13 @@ inputs:
     required: false
     description: >
       Extra arguments to pass to Fourmolu.
+  version:
+    required: false
+    description: >
+      The version number of Ormolu to use. Defaults to "latest". Example
+      version numbers -- `0.13.0.0`, `0.10.1.0`, etc. See
+      https://github.com/fourmolu/fourmolu/releases for a list of all releases.
+    default: latest
 runs:
   using: 'node16'
   main: 'dist/index.js'
