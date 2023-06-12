@@ -3,15 +3,38 @@ import * as fs from 'fs';
 
 const core = require('@actions/core');
 const github = require('@actions/github');
+const httpm = require('@actions/http-client');
 const tool_cache = require('@actions/tool-cache');
 const exec = require('@actions/exec');
 const glob = require('@actions/glob');
 
-const fourmolu_version = '0.12.0.0';
+// Get the latest release of fourmolu by querying the GitHub releases API.
+async function getLatestVersion() {
+  const apiUrl = "https://api.github.com/repos/fourmolu/fourmolu/releases";
 
-// XXX: These release binaries appear to be dynamically linked, so they may not
-// run on some systems.
-const fourmolu_linux_url = 'https://github.com/fourmolu/fourmolu/releases/download/v' + fourmolu_version + '/fourmolu-' + fourmolu_version + '-linux-x86_64';
+  let _http = new httpm.HttpClient("run-fourmolu github action");
+
+  const response = await _http.getJson(apiUrl);
+
+  const releases = response.result;
+
+  if (releases === null) {
+    core.setFailed('Failed to fetch releases from the fourmolu/fourmolu repository');
+  }
+
+  if (releases.length === 0) {
+    core.setFailed('No releases found for the fourmolu/fourmolu repository');
+  }
+
+  // Sort releases by published date in descending order
+  releases.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
+  // Return the version number of the latest release
+  return releases[0].tag_name.slice(1);
+}
+
+
+
 
 // TODO: As of this writing, there are no Windows or MacOSX binaries available
 // for fourmolu. However, according to
@@ -21,11 +44,21 @@ const fourmolu_linux_url = 'https://github.com/fourmolu/fourmolu/releases/downlo
 //const fourmolu_windows_url = 'https://github.com/fourmolu/fourmolu/releases/download/v' + fourmolu_version + '/fourmolu-' + fourmolu_version + '-windows-x86_64';
 //const fourmolu_macos_url = 'https://github.com/fourmolu/fourmolu/releases/download/v' + fourmolu_version + '/fourmolu-' + fourmolu_version + '-darwin-x86_64';
 
+const input_version = core.getInput('version');
 const input_pattern = core.getInput('pattern');
 const input_follow_symbolic_links = core.getInput('follow-symbolic-links').toUpperCase() !== 'FALSE';
 const input_extra_args = core.getInput('extra-args');
 
 async function run() {
+
+  const fourmolu_version = input_version === 'latest' ? await getLatestVersion() : input_version;
+
+  core.info(`version input to run-fourmolu: ${input_version}, version selected for use: ${fourmolu_version}`);
+
+  // XXX: These release binaries appear to be dynamically linked, so they may not
+  // run on some systems.
+  const fourmolu_linux_url = `https://github.com/fourmolu/fourmolu/releases/download/v${fourmolu_version}/fourmolu-${fourmolu_version}-linux-x86_64`;
+
   try {
 
     // Download fourmolu binary
