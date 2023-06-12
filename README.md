@@ -3,25 +3,46 @@
 ![CI](https://github.com/haskell-actions/run-fourmolu/workflows/CI/badge.svg?branch=master)
 
 This `run-fourmolu` GitHub Action helps to ensure that your Haskell project is
-formatted with [Fourmolu][fourmolu]. The action tries to find all Haskell source
-code files in your repository and fails if any of them are not formatted. In
-case of failure it prints the diff between the actual contents of the file
-and its formatted version.
+formatted with [Fourmolu][https://github.com/fourmolu/fourmolu/]. The action
+tries to find all Haskell source code files in your repository and fails if any
+of them are not formatted. In case of failure it prints the diff between the
+actual contents of the file and its formatted version.
 
 ## Example usage
 
 In the simple case all you need to do is to add this step to your job:
 
 ```yaml
-- uses: haskell-actions/run-fourmolu@v7
+- uses: haskell-actions/run-fourmolu@v9
+  with:
+    version: "0.13.0.0"
 ```
 
-The `@v7` after `haskell-actions/run-fourmolu` should be replaced with the version of the
+The `0.13.0.0` should be replaced with the version of Fourmolu you want to use.  See
+[Fourmolu releases](https://github.com/fourmolu/fourmolu/releases) for all Fourmolu versions.
+If you don't specify this Fourmolu `version` input, the latest version of
+Fourmolu will be used.
+
+The `@v9` after `haskell-actions/run-fourmolu` should be replaced with the version of the
 `run-fourmolu` Action you want to use. See
-[Releases](https://github.com/haskell-actions/run-fourmolu/releases) for all
-versions available. Each version of the `run-fourmolu` Action generally has a
-corresponding version of `fourmolu`. Make sure you pick a `run-fourmolu` Action
-version that uses the version of `fourmolu` you use locally.
+[run-fourmolu releases](https://github.com/haskell-actions/run-fourmolu/releases) for all
+run-fourmolu versions available.
+
+## Example using latest version of Fourmolu
+
+You can use the latest version of Fourmolu by specifying `version: "latest"`:
+
+```yaml
+- uses: haskell-actions/run-fourmolu@v9
+  with:
+    version: "latest"
+```
+
+Alternatively, if you leave out the `version` input, then `"latest"` will be assumed.
+
+_It is recommended that users always specify the exact version of Fourmolu they
+want to use, since new releases of Fourmolu are often not backwards compatible.
+Your CI may break when there is a new release of Fourmolu._
 
 ### Full example
 
@@ -38,7 +59,9 @@ jobs:
     steps:
       # Note that you must checkout your code before running haskell-actions/run-fourmolu
       - uses: actions/checkout@v2
-      - uses: haskell-actions/run-fourmolu@v7
+      - uses: haskell-actions/run-fourmolu@v9
+        with:
+          version: "0.13.0.0"
 ```
 
 ### Example with more Options
@@ -46,8 +69,12 @@ jobs:
 Here's a more complicated example that shows more options being used:
 
 ```yaml
-- uses: haskell-actions/run-fourmolu@v7
+- uses: haskell-actions/run-fourmolu@v9
   with:
+    # Use fourmolu-0.13.0.0.  If you don't specify this, then the latest
+    # release of fourmolu will be used.
+    version: "0.13.0.0"
+
     # Only check the format of .hs in the src/ directory.
     pattern: |
       src/**/*.hs
@@ -70,7 +97,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: haskell-actions/run-fourmolu@v7
+      - uses: haskell-actions/run-fourmolu@v9
+        with:
+          version: "0.13.0.0"
   build:
     runs-on: ubuntu-latest
     needs: fourmolu
@@ -136,22 +165,9 @@ to `./dist` whenever you make a change in `./index.js`.
 
 ## Making a new release
 
-There is a script to help with making a new release:
+Do the following steps to make a new release:
 
-```console
-$ ./bump.sh
-```
-
-This script bumps the version of `fourmolu` used by `run-fourmolu`,
-and creates a PR for this version bump.
-
-After this PR has been reviewed and merged in, you can create the new
-[Release](https://github.com/haskell-actions/run-fourmolu/releases) on
-GitHub with the following command. Make sure you're on the `master` branch:
-
-```console
-$ ./make-github-release.sh
-```
-
-[fourmolu]: https://github.com/fourmolu/fourmolu
-[git-core-autocrlf]: https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf
+1.  Add entries to [`CHANGELOG.md`](./CHANGELOG.md) for all changes since the
+    last release.
+2.  Manually create a GitHub release on
+    <https://github.com/haskell-actions/run-fourmolu/releases/new>.
