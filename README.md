@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Note that you must checkout your code before running haskell-actions/run-fourmolu
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: haskell-actions/run-fourmolu@v9
         with:
           version: "0.13.0.0"
@@ -96,7 +96,7 @@ jobs:
   fourmolu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: haskell-actions/run-fourmolu@v9
         with:
           version: "0.13.0.0"
