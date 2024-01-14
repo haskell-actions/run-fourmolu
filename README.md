@@ -75,9 +75,11 @@ Here's a more complicated example that shows more options being used:
     # release of fourmolu will be used.
     version: "0.13.0.0"
 
-    # Only check the format of .hs in the src/ directory.
+    # Only check the format of .hs in the src/ directory
+    # except src/Main.hs.
     pattern: |
       src/**/*.hs
+      !src/Main.hs
 
     # Don't follow symbolic links to .hs files.
     follow-symbolic-links: false
@@ -85,6 +87,8 @@ Here's a more complicated example that shows more options being used:
     # Extra args to pass to fourmolu on the command line.
     extra-args: "--indent-wheres true"
 ```
+
+See [docs](https://github.com/actions/toolkit/tree/main/packages/glob#patterns) on pattern syntax.
 
 ### Example usage with build matrix
 

@@ -3,9 +3,19 @@ description: 'Check formatting of Haskell code with Fourmolu'
 inputs:
   pattern:
     required: false
-    description: >
-      Glob pattern that are used to find source files to format. It is
-      possible to specify several patterns by putting each on a new line.
+    description: |
+      Glob pattern that is used to find source files to format.
+
+      See [docs](https://github.com/actions/toolkit/tree/main/packages/glob#patterns) on pattern syntax.
+
+      It is possible to specify several patterns by putting each one on a new line.
+
+      ```yaml
+      src/**/*.hs
+      !src/Main.hs
+      ```
+
+      `src/Main.hs` will be skipped.
     default: |
       **/*.hs
       **/*.hs-boot
