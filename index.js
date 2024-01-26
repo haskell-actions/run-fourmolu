@@ -2,7 +2,6 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 const core = require('@actions/core');
-const github = require('@actions/github');
 const httpm = require('@actions/http-client');
 const tool_cache = require('@actions/tool-cache');
 const exec = require('@actions/exec');
