@@ -1,3 +1,9 @@
+## run-fourmolu v10
+
+*   Upgrade `run-formolu` to work with Node 20 instead of Node 16.
+    Also upgrade the versions of various dependent JS libraries.
+    [#25](https://github.com/haskell-actions/run-fourmolu/pull/25)
+
 ## run-fourmolu v9
 
 *   `run-fourmolu` Action now takes a `version` argument to allow you to
