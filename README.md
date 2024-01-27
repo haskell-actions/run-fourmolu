@@ -3,7 +3,7 @@
 ![CI](https://github.com/haskell-actions/run-fourmolu/workflows/CI/badge.svg?branch=master)
 
 This `run-fourmolu` GitHub Action helps to ensure that your Haskell project is
-formatted with [Fourmolu][https://github.com/fourmolu/fourmolu/]. The action
+formatted with [Fourmolu](https://github.com/fourmolu/fourmolu/). The action
 tries to find all Haskell source code files in your repository and fails if any
 of them are not formatted. In case of failure it prints the diff between the
 actual contents of the file and its formatted version.
@@ -140,8 +140,8 @@ In order to do development on this repo, you first need to install NodeJS and
 `npm` to your system. This has been confirmed to work with the following
 versions, but newer (or slightly older) versions may work as well:
 
-- **NodeJS**: 14.19.1
-- **`npm`**: 6.14.16
+- **NodeJS**: v20.3.1
+- **`npm`**: 9.6.7
 
 Next, clone this repo:
 
