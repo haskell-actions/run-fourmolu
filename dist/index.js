@@ -33000,6 +33000,7 @@ const input_version = core.getInput('version');
 const input_pattern = core.getInput('pattern');
 const input_follow_symbolic_links = core.getInput('follow-symbolic-links').toUpperCase() !== 'FALSE';
 const input_extra_args = core.getInput('extra-args');
+const input_working_directory = core.getInput('working-directory');
 
 async function run() {
 
@@ -33012,6 +33013,17 @@ async function run() {
   const fourmolu_linux_url = `https://github.com/fourmolu/fourmolu/releases/download/v${fourmolu_version}/fourmolu-${fourmolu_version}-linux-x86_64`;
 
   try {
+    // Set working directory if specified
+    let originalCwd;
+    if (input_working_directory) {
+      originalCwd = process.cwd();
+      if (!fs__WEBPACK_IMPORTED_MODULE_1__.existsSync(input_working_directory)) {
+        core.setFailed(`Working directory '${input_working_directory}' does not exist`);
+        return;
+      }
+      process.chdir(input_working_directory);
+      core.info(`Changed working directory to: ${input_working_directory}`);
+    }
 
     // Download fourmolu binary
 
@@ -33084,7 +33096,17 @@ async function run() {
         core.warning("The glob patterns did not match any source files");
     }
 
+    // Restore original working directory if it was changed
+    if (input_working_directory && originalCwd) {
+      process.chdir(originalCwd);
+      core.info(`Restored working directory to: ${originalCwd}`);
+    }
+
   } catch (error) {
+    // Restore original working directory even if there was an error
+    if (input_working_directory && originalCwd) {
+      process.chdir(originalCwd);
+    }
     core.setFailed("fourmolu detected unformatted files");
   }
 }
