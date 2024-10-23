@@ -38,6 +38,10 @@ inputs:
       necessarily backwards-compatible.  You are recommended to specify the
       version of fourmolu you wish to use.
     default: latest
+  working-directory:
+    description: >
+      Directory to run Fourmolu.
+    required: false
 runs:
   using: 'node20'
   main: 'dist/index.js'
