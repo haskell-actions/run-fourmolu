@@ -33024,6 +33024,8 @@ async function run() {
       }
       process.chdir(input_working_directory);
       core.info(`Changed working directory to: ${input_working_directory}`);
+      newCwd = process.cwd();
+      core.info(`New working directory: ${newCwd}`);
     }
 
     // Download fourmolu binary
@@ -33107,6 +33109,7 @@ async function run() {
     // Restore original working directory even if there was an error
     if (originalCwd) {
       process.chdir(originalCwd);
+      core.info(`Restored working directory to: ${originalCwd}`);
     }
     core.setFailed("fourmolu detected unformatted files");
   }
