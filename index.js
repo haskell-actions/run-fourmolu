@@ -59,9 +59,10 @@ async function run() {
   // run on some systems.
   const fourmolu_linux_url = `https://github.com/fourmolu/fourmolu/releases/download/v${fourmolu_version}/fourmolu-${fourmolu_version}-linux-x86_64`;
 
+  // Declare originalCwd outside the try block so it's accessible in catch below for error handling
+  let originalCwd = undefined;
+
   try {
-    // Set working directory if specified
-    let originalCwd;
     if (input_working_directory) {
       originalCwd = process.cwd();
       if (!fs.existsSync(input_working_directory)) {
@@ -144,14 +145,14 @@ async function run() {
     }
 
     // Restore original working directory if it was changed
-    if (input_working_directory && originalCwd) {
+    if (originalCwd) {
       process.chdir(originalCwd);
       core.info(`Restored working directory to: ${originalCwd}`);
     }
 
   } catch (error) {
     // Restore original working directory even if there was an error
-    if (input_working_directory && originalCwd) {
+    if (originalCwd) {
       process.chdir(originalCwd);
     }
     core.setFailed("fourmolu detected unformatted files");
