@@ -63,17 +63,9 @@ async function run() {
   let originalCwd = undefined;
 
   try {
-    // Print initial directory info
-    core.info(`Starting directory: ${process.cwd()}`);
-    core.info('Current directory contents:');
-    fs.readdirSync(process.cwd()).forEach(file => {
-      core.info(`- ${file}`);
-    });
-
     // Set working directory if specified
     if (input_working_directory) {
       originalCwd = process.cwd();
-      core.info(`Original working directory: ${originalCwd}`);
 
       const absoluteWorkingDir = path.resolve(input_working_directory);
       core.info(`Attempting to change to directory: ${absoluteWorkingDir}`);
@@ -86,11 +78,6 @@ async function run() {
       process.chdir(absoluteWorkingDir);
       const newCwd = process.cwd();
       core.info(`Changed working directory to: ${newCwd}`);
-
-      core.info('New directory contents:');
-      fs.readdirSync(newCwd).forEach(file => {
-        core.info(`- ${file}`);
-      });
     }
 
     // Download fourmolu binary
