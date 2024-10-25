@@ -33000,6 +33000,7 @@ const input_version = core.getInput('version');
 const input_pattern = core.getInput('pattern');
 const input_follow_symbolic_links = core.getInput('follow-symbolic-links').toUpperCase() !== 'FALSE';
 const input_extra_args = core.getInput('extra-args');
+const input_working_directory = core.getInput('working-directory');
 
 async function run() {
 
@@ -33011,7 +33012,26 @@ async function run() {
   // run on some systems.
   const fourmolu_linux_url = `https://github.com/fourmolu/fourmolu/releases/download/v${fourmolu_version}/fourmolu-${fourmolu_version}-linux-x86_64`;
 
+  // Declare originalCwd outside the try block so it's accessible in catch below for error handling
+  let originalCwd = undefined;
+
   try {
+    // Set working directory if specified
+    if (input_working_directory) {
+      originalCwd = process.cwd();
+
+      const absoluteWorkingDir = path__WEBPACK_IMPORTED_MODULE_0__.resolve(input_working_directory);
+      core.info(`Attempting to change to directory: ${absoluteWorkingDir}`);
+
+      if (!fs__WEBPACK_IMPORTED_MODULE_1__.existsSync(absoluteWorkingDir)) {
+        core.setFailed(`Working directory '${absoluteWorkingDir}' does not exist`);
+        return;
+      }
+
+      process.chdir(absoluteWorkingDir);
+      const newCwd = process.cwd();
+      core.info(`Changed working directory to: ${newCwd}`);
+    }
 
     // Download fourmolu binary
 
@@ -33084,7 +33104,18 @@ async function run() {
         core.warning("The glob patterns did not match any source files");
     }
 
+    // Restore original working directory if it was changed
+    if (originalCwd) {
+      process.chdir(originalCwd);
+      core.info(`Restored working directory to: ${originalCwd}`);
+    }
+
   } catch (error) {
+    // Restore original working directory even if there was an error
+    if (originalCwd) {
+      process.chdir(originalCwd);
+      core.info(`Restored working directory to: ${originalCwd}`);
+    }
     core.setFailed("fourmolu detected unformatted files");
   }
 }
