@@ -24,5 +24,5 @@ jobs:
         run: git config --global core.autocrlf false
       - uses: actions/checkout@v4
       - uses: ./.
-        with:
-          working-directory: ./test-code/
+        # with:
+        #   working-directory: ./test-code/
