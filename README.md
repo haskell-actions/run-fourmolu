@@ -86,6 +86,9 @@ Here's a more complicated example that shows more options being used:
 
     # Extra args to pass to fourmolu on the command line.
     extra-args: "--indent-wheres true"
+
+    # Change to the ./my-haskell-code/ directory before running this action.
+    working-directory: "./my-haskell-code"
 ```
 
 See [docs](https://github.com/actions/toolkit/tree/main/packages/glob#patterns) on pattern syntax.

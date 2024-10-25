@@ -40,7 +40,11 @@ inputs:
     default: latest
   working-directory:
     description: >
-      Directory to run Fourmolu.
+      Directory in which to run Fourmolu.  This also affects how the `pattern`
+      argument is interpretted, with Glob patterns being relative to this
+      `working-directory` argument.
+
+      Defaults to the repository root if not set.
     required: false
 runs:
   using: 'node20'

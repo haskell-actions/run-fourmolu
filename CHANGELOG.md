@@ -1,3 +1,9 @@
+## run-fourmolu v11
+
+*   Add a new `working-directory` argument that allows you to change the
+    working directory that `fourmolu` is run from.
+    [#29](https://github.com/haskell-actions/run-fourmolu/pull/29)
+
 ## run-fourmolu v10
 
 *   Upgrade `run-formolu` to work with Node 20 instead of Node 16.
