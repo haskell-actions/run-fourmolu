@@ -13,7 +13,7 @@ actual contents of the file and its formatted version.
 In the simple case all you need to do is to add this step to your job:
 
 ```yaml
-- uses: haskell-actions/run-fourmolu@v9
+- uses: haskell-actions/run-fourmolu@v12
   with:
     version: "0.13.0.0"
 ```
@@ -23,7 +23,7 @@ The `0.13.0.0` should be replaced with the version of Fourmolu you want to use. 
 If you don't specify this Fourmolu `version` input, the latest version of
 Fourmolu will be used.
 
-The `@v9` after `haskell-actions/run-fourmolu` should be replaced with the version of the
+The `@v12` after `haskell-actions/run-fourmolu` should be replaced with the version of the
 `run-fourmolu` Action you want to use. See
 [run-fourmolu releases](https://github.com/haskell-actions/run-fourmolu/releases) for all
 run-fourmolu versions available.
@@ -33,7 +33,7 @@ run-fourmolu versions available.
 You can use the latest version of Fourmolu by specifying `version: "latest"`:
 
 ```yaml
-- uses: haskell-actions/run-fourmolu@v9
+- uses: haskell-actions/run-fourmolu@v12
   with:
     version: "latest"
 ```
@@ -59,7 +59,7 @@ jobs:
     steps:
       # Note that you must checkout your code before running haskell-actions/run-fourmolu
       - uses: actions/checkout@v3
-      - uses: haskell-actions/run-fourmolu@v9
+      - uses: haskell-actions/run-fourmolu@v12
         with:
           version: "0.13.0.0"
 ```
@@ -69,7 +69,7 @@ jobs:
 Here's a more complicated example that shows more options being used:
 
 ```yaml
-- uses: haskell-actions/run-fourmolu@v9
+- uses: haskell-actions/run-fourmolu@v12
   with:
     # Use fourmolu-0.13.0.0.  If you don't specify this, then the latest
     # release of fourmolu will be used.
@@ -104,7 +104,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: haskell-actions/run-fourmolu@v9
+      - uses: haskell-actions/run-fourmolu@v12
         with:
           version: "0.13.0.0"
   build:

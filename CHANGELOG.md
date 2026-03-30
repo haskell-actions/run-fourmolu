@@ -1,3 +1,13 @@
+## run-fourmolu v12
+
+*   Upgrade from Node.js 20 to Node.js 24.  This is a required upgrade since
+    GitHub Actions is
+    [deprecating Node.js 20](https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/).
+    Runners will default to Node.js 24 starting June 2, 2026, and Node.js 20
+    will be fully removed in fall 2026.  Older versions of `run-fourmolu` (v11
+    and below) will stop working after this date.
+    [#32](https://github.com/haskell-actions/run-fourmolu/pull/32)
+
 ## run-fourmolu v11
 
 *   Add a new `working-directory` argument that allows you to change the
