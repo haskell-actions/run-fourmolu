@@ -32985,8 +32985,18 @@ async function getLatestVersion() {
   return releases[0].tag_name.slice(1);
 }
 
-
-
+function compareVersions(a, b) {
+  const pa = a.split('.');
+  const pb = b.split('.');
+  const len = Math.max(pa.length, pb.length);
+  for (let i = 0; i < len; i++) {
+    const ai = parseInt(pa[i] ?? '0', 10);
+    const bi = parseInt(pb[i] ?? '0', 10);
+    if (ai > bi) return 1;
+    if (ai < bi) return -1;
+  }
+  return 0;
+}
 
 // TODO: As of this writing, there are no Windows or MacOSX binaries available
 // for fourmolu. However, according to
@@ -33010,7 +33020,13 @@ async function run() {
 
   // XXX: These release binaries appear to be dynamically linked, so they may not
   // run on some systems.
-  const fourmolu_linux_url = `https://github.com/fourmolu/fourmolu/releases/download/v${fourmolu_version}/fourmolu-${fourmolu_version}-linux-x86_64`;
+  let fourmolu_linux_url = `https://github.com/fourmolu/fourmolu/releases/download/v${fourmolu_version}/fourmolu-${fourmolu_version}-linux-x86_64`;
+
+  const versionWithNewFormat = "0.20.0.0";
+  const useZip = compareVersions(fourmolu_version, versionWithNewFormat) >= 0;
+  if (useZip) {
+    fourmolu_linux_url += ".zip";
+  }
 
   // Declare originalCwd outside the try block so it's accessible in catch below for error handling
   let originalCwd = undefined;
@@ -33035,11 +33051,17 @@ async function run() {
 
     // Download fourmolu binary
 
-    var fourmolu_downloaded_binary;
-
+    var fourmolu_binary;
 
     if (process.platform === 'linux') {
-        fourmolu_downloaded_binary = await tool_cache.downloadTool(fourmolu_linux_url);
+        const downloaded = await tool_cache.downloadTool(fourmolu_linux_url);
+        if (useZip) {
+            const extractedDir = await tool_cache.extractZip(downloaded);
+            fourmolu_binary = path__WEBPACK_IMPORTED_MODULE_0__.join(extractedDir, `fourmolu-${fourmolu_version}-linux-x86_64`, 'fourmolu');
+        } else {
+            fourmolu_binary = path__WEBPACK_IMPORTED_MODULE_0__.join(path__WEBPACK_IMPORTED_MODULE_0__.dirname(downloaded), 'fourmolu');
+            fs__WEBPACK_IMPORTED_MODULE_1__.renameSync(downloaded, fourmolu_binary);
+        }
     }
     // else if (process.platform === 'darwin') {
     //     fourmolu_downloaded_binary = await tool_cache.downloadTool(fourmolu_macos_url);
@@ -33050,12 +33072,6 @@ async function run() {
     else {
         core.setFailed("no fourmolu binary found for platform: " + process.platform);
     }
-
-    // At this point, fourmolu_downloaded_binary is the fourmolu binary we just
-    // downloaded, but tool_cache.downloadTool() gives it a random UUID as a
-    // name.  We rename it to `fourmolu` here.
-    const fourmolu_binary = path__WEBPACK_IMPORTED_MODULE_0__.join(path__WEBPACK_IMPORTED_MODULE_0__.dirname(fourmolu_downloaded_binary), 'fourmolu');
-    fs__WEBPACK_IMPORTED_MODULE_1__.renameSync(fourmolu_downloaded_binary, fourmolu_binary)
 
     // Cache fourmolu executable
 
