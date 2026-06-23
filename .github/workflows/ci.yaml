@@ -23,4 +23,9 @@ jobs:
         if: runner.os == 'Windows'
         run: git config --global core.autocrlf false
       - uses: actions/checkout@v4
-      - uses: ./.
+      - name: Test with latest version
+        uses: ./.
+      - name: Test with bare binary format (< 0.20.0.0)
+        uses: ./.
+        with:
+          version: "0.19.0.1"
