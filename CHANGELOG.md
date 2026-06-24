@@ -1,3 +1,21 @@
+## run-fourmolu v13
+
+*   With [`fourmolu-0.20.0.0`](https://github.com/fourmolu/fourmolu/releases/tag/v0.20.0.0),
+    the upstream releases are now included in a
+    zipfile, instead of being distributed as a raw binary.
+
+    `run-fourmolu` has been updated to now work with this zipfile format.  It is
+    still backwards compatible with the raw-exec format from
+    [`fourmolu-0.19.0.1`](https://github.com/fourmolu/fourmolu/releases/tag/v0.19.0.1)
+    and previous releases.
+
+    NOTE THAT USERS MUST UPGRADE `run-fourmolu` TO `>= v13` IF YOU WANT TO USE
+    `fourmolu >= 0.20.0.0`.
+
+    [#33](https://github.com/haskell-actions/run-fourmolu/pull/33)
+
+    Thanks [@webdevred](https://github.com/webdevred)!
+
 ## run-fourmolu v12
 
 *   Upgrade from Node.js 20 to Node.js 24.  This is a required upgrade since
